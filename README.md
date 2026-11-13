@@ -21,6 +21,12 @@
     <img alt="Clover MMO: RPG online no navegador" src="./assets/clover-light.svg" width="49%">
   </picture>
 </a>
+<a href="https://github.com/andrenxx/portfolio">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/portfolio-dark.svg">
+    <img alt="Portfólio: este site, em três idiomas" src="./assets/portfolio-light.svg" width="98.6%">
+  </picture>
+</a>
 
 &nbsp;
 

@@ -118,11 +118,39 @@ def network(t):
 <text class="t" x="440" y="40" font-size="11" fill="{t['accent_text']}" text-anchor="middle">WebRTC</text>"""
 
 
+def portfolio_card(name, t):
+    langs = "".join(
+        f'<text class="b" x="{1006 + k * 34}" y="54" font-size="12" fill="{t["ink3"]}">{l}</text>'
+        for k, l in enumerate(["PT", "EN", "ES"])
+    )
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="230" viewBox="0 0 1200 230" role="img" aria-label="Portfólio: este site, em três idiomas, no Cloudflare Pages">
+{style(t, ["display", "text", "text-bold"])}
+<style>@keyframes slide{{0%,28%{{transform:translateX(0)}}33%,61%{{transform:translateX(34px)}}66%,94%{{transform:translateX(68px)}}100%{{transform:translateX(0)}}}}.pill{{animation:slide 7.5s cubic-bezier(.16,1,.3,1) infinite}}</style>
+<rect width="1200" height="230" rx="16" fill="{t['raise_']}"/>
+<rect x=".5" y=".5" width="1199" height="229" rx="15.5" fill="none" stroke="{t['line']}"/>
+<text class="d" x="30" y="70" font-size="46" fill="{t['ink']}">Portfólio</text>
+<text class="t" x="30" y="108" font-size="17" fill="{t['ink2']}">Este site, em três idiomas.</text>
+<text class="t" x="30" y="196" font-size="15" fill="{t['ink3']}">Next.js · TypeScript · Cloudflare Pages</text>
+<text class="b" x="560" y="196" font-size="15" fill="{t['accent_text']}" text-anchor="end">→</text>
+<rect x="640" y="26" width="530" height="178" rx="12" fill="{t['bg']}" stroke="{t['line']}"/>
+<circle cx="660" cy="44" r="4" fill="{t['line']}"/><circle cx="674" cy="44" r="4" fill="{t['line']}"/><circle cx="688" cy="44" r="4" fill="{t['line']}"/>
+<rect class="pill" x="998" y="38" width="30" height="22" rx="5" fill="{t['raise2']}" stroke="{t['line']}"/>
+{langs}
+<text class="d" x="664" y="118" font-size="44" fill="{t['ink']}">André</text>
+<text class="d" x="664" y="160" font-size="44" fill="{t['accent_text']}">Natividade</text>
+<rect x="1040" y="84" width="104" height="96" rx="10" fill="{t['raise2']}" stroke="{t['line']}"/>
+<rect x="664" y="176" width="70" height="14" rx="4" fill="{t['accent']}"/>
+<rect x="742" y="176" width="54" height="14" rx="4" fill="{t['raise2']}" stroke="{t['line']}"/>
+</svg>"""
+    (OUT / f"portfolio-{name}.svg").write_text(svg)
+
+
 for name, t in THEMES.items():
     header(name, t)
     card("dumpit", "DumpIt", "Texto livre vira Kanban com IA.", "",
          "React · TypeScript · Supabase", kanban, name, t)
     card("clover", "Clover MMO", "RPG online no navegador.", "",
          "Phaser 4 · Cloudflare · WebRTC", network, name, t)
+    portfolio_card(name, t)
 
 print("ok:", sorted(p.name for p in OUT.iterdir()))
