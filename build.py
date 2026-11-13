@@ -118,6 +118,39 @@ def network(t):
 <text class="t" x="440" y="40" font-size="11" fill="{t['accent_text']}" text-anchor="middle">WebRTC</text>"""
 
 
+def ledger_card(name, t):
+    rows = [("Alice", "-25,50", "74,50", t["ink2"]), ("Bob", "+25,50", "25,50", t["accent_text"])]
+    body = ""
+    for i, (who, amount, after, color) in enumerate(rows):
+        y = 96 + i * 44
+        body += f"""<g class="row" style="animation-delay:{i * 0.3:.1f}s">
+<text class="b" x="684" y="{y}" font-size="17" fill="{t['ink']}">{who}</text>
+<text class="b" x="1010" y="{y}" font-size="17" fill="{color}" text-anchor="end">{amount}</text>
+<text class="t" x="1130" y="{y}" font-size="14" fill="{t['ink3']}" text-anchor="end">{after}</text>
+<line x1="684" y1="{y + 16}" x2="1130" y2="{y + 16}" stroke="{t['line']}"/>
+</g>"""
+    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="230" viewBox="0 0 1200 230" role="img" aria-label="Ledger: partidas dobradas em Java e Spring Boot">
+{style(t, ["display", "text", "text-bold"])}
+<style>@keyframes rowin{{0%{{opacity:.3;transform:translateX(-8px)}}12%,100%{{opacity:1;transform:none}}}}@keyframes okin{{0%,5%{{opacity:0}}15%,100%{{opacity:1}}}}.row{{animation:rowin 6s cubic-bezier(.16,1,.3,1) infinite both}}.ok{{animation:okin 6s .7s infinite both}}@media (prefers-reduced-motion:reduce){{.row,.ok{{animation:none}}}}</style>
+<rect width="1200" height="230" rx="16" fill="{t['raise_']}"/>
+<rect x=".5" y=".5" width="1199" height="229" rx="15.5" fill="none" stroke="{t['line']}"/>
+<text class="d" x="30" y="70" font-size="46" fill="{t['ink']}">Ledger</text>
+<text class="t" x="30" y="108" font-size="17" fill="{t['ink2']}">Partidas dobradas, à prova de concorrência.</text>
+<text class="t" x="30" y="196" font-size="15" fill="{t['ink3']}">Java · Spring Boot · PostgreSQL</text>
+<text class="b" x="560" y="196" font-size="15" fill="{t['accent_text']}" text-anchor="end">→</text>
+<rect x="640" y="26" width="530" height="178" rx="12" fill="{t['bg']}" stroke="{t['line']}"/>
+<text class="b" x="684" y="58" font-size="12" fill="{t['ink3']}">Lançamento · TRANSFER</text>
+<text class="t" x="1130" y="58" font-size="12" fill="{t['ink3']}" text-anchor="end">#1042</text>
+<line x1="684" y1="70" x2="1130" y2="70" stroke="{t['line']}"/>
+{body}
+<text class="t" x="684" y="184" font-size="14" fill="{t['ink3']}">soma</text>
+<text class="b" x="1010" y="184" font-size="15" fill="{t['ink']}" text-anchor="end">0,00</text>
+<g class="ok"><path d="M1021 178.5l3.5 3.5 6.5-7.5" fill="none" stroke="{t['accent_text']}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="b" x="1130" y="184" font-size="12" fill="{t['accent_text']}" text-anchor="end">balancete fecha</text></g>
+</svg>"""
+    (OUT / f"ledger-{name}.svg").write_text(svg)
+
+
 def portfolio_card(name, t):
     langs = "".join(
         f'<text class="b" x="{1006 + k * 34}" y="54" font-size="12" fill="{t["ink3"]}">{l}</text>'
@@ -152,5 +185,6 @@ for name, t in THEMES.items():
     card("clover", "Clover MMO", "RPG online no navegador.", "",
          "Phaser 4 · Cloudflare · WebRTC", network, name, t)
     portfolio_card(name, t)
+    ledger_card(name, t)
 
 print("ok:", sorted(p.name for p in OUT.iterdir()))

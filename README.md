@@ -9,6 +9,12 @@
 
 &nbsp;
 
+<a href="https://github.com/andrenxx/ledger">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/ledger-dark.svg">
+    <img alt="Ledger: partidas dobradas em Java e Spring Boot" src="./assets/ledger-light.svg" width="98.6%">
+  </picture>
+</a>
 <a href="https://andrenatividade.is-a.dev/p/dumpit/">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./assets/dumpit-dark.svg">
@@ -38,7 +44,7 @@
 &nbsp;
 
 **Front e mobile** — TypeScript, React, React Native, Next.js, Tailwind CSS<br>
-**Back-end** — Node.js, NestJS, Java, Python, APIs REST, WebSocket<br>
+**Back-end** — Java, Spring Boot, Node.js, NestJS, Python, APIs REST, WebSocket<br>
 **Dados** — PostgreSQL, Supabase, SQL, RLS, presigned URLs (S3/R2)<br>
 **Cloud e infra** — Cloudflare, Docker, GitHub Actions, Grafana<br>
 **IA** — Agentes de IA, MCP, skills, Spec-Driven Development
